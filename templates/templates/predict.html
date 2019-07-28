@@ -1,0 +1,200 @@
+<html lang="en">
+<!--{% block code_block %}-->
+<head>
+    <meta charset="UTF-8">
+    <title class="centered"> Airline Delay Prediction</title>
+    <style>
+        * {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea, input[type=date] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+
+.container {
+  border-radius: 5px;
+  padding: 20px;
+  height: 60%;
+}
+
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.col-20 {
+  float: left;
+  width: 20%;
+  margin-top: 4px;
+}
+
+.dbl-margin-right {
+    margin-right: 30px;
+}
+
+.dbl-margin-top {
+    margin-top: 30px;
+}
+
+.base-margin-bottom {
+    margin-bottom: 15px;
+}
+
+.base-padding-bottom {
+    padding-bottom: 15px;
+}
+
+.base-padding-top {
+    padding-top: 15px;
+}
+
+.flex-center-vertical {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center-vertical > select {
+    width: 65px;
+    margin: 0 5px;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-red {
+    color: red;
+}
+
+
+.text-blue {
+    color: #00bceb;
+}
+
+.text-bold {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.banner {
+  width: 100%; 
+  height: 100%; 
+  background: url({{ url_for('static', filename='flight.jpg') }}) no-repeat;
+}
+
+.col-70 {
+    width: 70%;
+  
+}
+    </style>
+</head>
+<body>
+    <!-- base-padding-bottom -->
+    <div class='banner'>
+        <div class="container">
+            <h2 class="text-blue  ">Airline Delay Prediction Result</h2>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                    <label for="origin">Origin Airport</label>
+                </div>
+                <div class="col-20 dbl-margin-right">
+                    <textarea class="col-70 "  rows= "1" >{{ORIGIN}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                    <label for="destination">Destination Airport</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1">{{DESTINATION}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="Month">Month Number</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1" >{{MONTH}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="MonthDay">Day of Month</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1">{{DAY_OF_MONTH}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="Weekday">Day of Week</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1" >{{DAY_OF_WEEK}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="airlineCode">Airline Code</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1" >{{CARRIER}}</textarea>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="arrivalTime">Arrival Time</label>
+                </div>
+                <div class="col-20 dbl-margin-right">
+                    <textarea class="col-70 " rows= "1">{{ARV_TIME}}</textarea> 
+                </div>
+              </div>
+                <div class="row base-margin-bottom">
+                <div class="col-15">
+                    <label for="departureTime">Departure Time</label>
+                </div>
+                <div class="col-20">
+                    <textarea class="col-70 " rows= "1" >{{DPT_TIME}}</textarea> 
+                </div>
+              </div>
+              <!-- <div class="flex base-margin-bottom base-padding-top">
+                <input type="reset" value="Clear" class="dbl-margin-right">
+                <input type="submit" value="Predict">
+              </div> -->
+            <div class="row base-margin-bottom flex-center-vertical ">
+                <label for="warnings" class="text-white text-bold">Delay Prediction</label>
+                <textarea class="col-70 " rows="1">{{RESULT}}</textarea>
+            </div>
+          </div>
+          
+    </div>
+
+</body>
+  <!--{% endblock code_block %}-->
+</html>

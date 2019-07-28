@@ -1,0 +1,252 @@
+<html lang="en">
+<!--{% block code_block %}-->
+<head>
+    <meta charset="UTF-8">
+    <title class="centered"> Airline Delay Prediction</title>
+    <style>
+        * {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea, input[type=date] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #00bceb;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #00bceb;
+}
+
+.container {
+  border-radius: 5px;
+  padding: 30px;
+  height: 100%;
+}
+
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.col-20 {
+  float: left;
+  width: 20%;
+  margin-top: 6px;
+}
+
+.col-60 {
+  float: left;
+  width: 40%;
+  margin-top: 6px;
+  margin-left: 300px;
+}
+
+
+.dbl-margin-right {
+    margin-right: 40px;
+}
+
+.dbl-margin-top {
+    margin-top: 40px;
+}
+
+.base-margin-bottom {
+    margin-bottom: 20px;
+}
+
+.base-padding-bottom {
+    padding-bottom: 20px;
+}
+
+.base-padding-top {
+    padding-top: 20px;
+}
+
+.flex-center-vertical {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center-vertical > select {
+    width: 65px;
+    margin: 0 5px;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-blue {
+    color: #00bceb;
+}
+
+.text-red {
+    color: red;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.text-bold {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.banner {
+  width: 100%; 
+  height: 100%; 
+  background: url({{ url_for('static', filename='flight.jpg') }}) no-repeat;
+}
+
+.col-70 {
+    width: 70%;
+}
+    </style>
+</head>
+<body>
+
+    <div class='banner'>
+        <div class="container">
+            <h1 class="text-blue base-padding-bottom">Airline Delay Prediction</h1>
+            <form action="http://localhost:5000/analysis" method="POST">
+                <div class="flex base-margin-bottom base-padding-top">
+                <input type="submit" value="Analysis">
+              </div>
+                </form>
+                <form action="http://localhost:5000" method="POST">
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                    <label for="origin">Origin Airport</label>
+                </div>
+                <div class="col-20 dbl-margin-right">
+                    <select name="origin">
+                        <option value="Select-Option">Select-Option</option>
+                         {% for key,value in origin_code.items()  %}
+                            <option value="{{key}}">{{value}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-15">
+                    <label for="destination">Destination Airport</label>
+                </div>
+                <div class="col-20">
+                    <select name="destination">
+                        <option value="Select-Option">Select-Option</option>
+                       {% for key,value in destination_code.items()  %}
+                            <option value="{{key}}">{{value}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="date">Journey Date</label>
+                </div>
+                <div class="col-20">
+                  <input type="date" id="date" name="journeydate">
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="airlineCode">Airline Code</label>
+                </div>
+                <div class="col-20">
+                  <select id="airlineCode" name="airlineCode">
+                      <option value="Select-Option">Select-Option</option>
+                      {% for key,value in carrier_code.items()  %}
+                        <option value="{{key}}">{{value}}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row base-margin-bottom">
+                <div class="col-15">
+                  <label for="arrivalTime">Arrival Time</label>
+                </div>
+                <div class="col-20 dbl-margin-right">
+                    <div class="flex-center-vertical">
+                    <select id="Ahour" name="Ahour">
+                      <option value="Select-Option">--</option>
+                        {% for value in Ahour  %}
+                                 <option value="{{value}}">{{value}}</option>
+                        {% endfor %}>
+                    </select>
+                    <span class="text-white"> : </span>
+                    <select id="Aminute" name="Aminute">
+                        <option value="Select-Option">--</option>
+                       {% for value in Aminute  %}
+                                 <option value="{{value}}">{{value}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div class="col-15">
+                    <label for="departureTime">Departure Time</label>
+                </div>
+                <div class="col-20">
+                    <div class="flex-center-vertical">
+                        <select id="Dhour" name="Dhour">
+                            <option value="Select-Option">--</option>
+                            {% for value in Dhour  %}
+                                 <option value="{{value}}">{{value}}</option>
+                            {% endfor %}
+
+                        </select>
+                        <span class="text-white"> : </span>
+                        <select id="Dminute" name="Dminute">
+                            <option value="Select-Option">--</option>
+                           {% for value in Dminute  %}
+                                 <option value="{{value}}">{{value}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+              </div>
+              <div class="flex base-margin-bottom base-padding-top">
+                <input type="reset" value="Clear" class="dbl-margin-right">
+                <input type="submit" value="Predict">
+              </div>
+            </form>
+             <div class="row base-margin-bottom flex-center-vertical dbl-margin-top">
+                <!--<label for="warnings" class="text-red text-bold">Errors (if any)</label>-->
+               <textarea class="col-60 text-red" >{{result}}</textarea>
+            </div>
+
+          </div>
+          
+    </div>
+
+</body>
+  <!--{% endblock code_block %}-->
+</html>
